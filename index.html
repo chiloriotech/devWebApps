@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Custom styles -->
+    <style>
+        #reader {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        video {
+            width: 100%;
+            border-radius: 6px;
+        }
+        .hero-body {
+            padding-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">QR Code Scanner</h1>
+                <p class="subtitle">Point your camera at a QR code</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="box">
+                <div id="reader">
+                    <video id="qr-video" class="mb-4"></video>
+                </div>
+
+                <div class="buttons is-centered">
+                    <button id="start-button" class="button is-success">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            </svg>
+                        </span>
+                        <span>Start Scanner</span>
+                    </button>
+                    <button id="stop-button" class="button is-danger" disabled>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                            </svg>
+                        </span>
+                        <span>Stop Scanner</span>
+                    </button>
+                </div>
+
+                <article id="result" class="message is-info">
+                    <div class="message-header">
+                        <p>Scan Result</p>
+                    </div>
+                    <div class="message-body">
+                        No QR code detected yet
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Include the QR code scanner library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script>
+        const video = document.getElementById("qr-video");
+        const result = document.querySelector("#result .message-body");
+        const startButton = document.getElementById("start-button");
+        const stopButton = document.getElementById("stop-button");
+
+        let stream = null;
+        let scanning = false;
+
+        // Start scanning
+        startButton.addEventListener("click", async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "environment" } // Prefer rear camera on mobile
+                });
+                video.srcObject = stream;
+                video.play();
+                scanning = true;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                result.textContent = "Scanning...";
+                scanQRCode();
+            } catch (err) {
+                result.textContent = `Error: ${err.message}`;
+                console.error(err);
+            }
+        });
+
+        // Stop scanning
+        stopButton.addEventListener("click", () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                scanning = false;
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                result.textContent = "Scanner stopped";
+            }
+        });
+
+        // QR Code scanning function
+        function scanQRCode() {
+            if (!scanning) return;
+
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+            if (code) {
+                result.textContent = code.data;
+                result.parentElement.classList.remove("is-info");
+                result.parentElement.classList.add("is-success");
+            } else if (scanning) {
+                requestAnimationFrame(scanQRCode);
+            }
+        }
+    </script>
+</body>
+</html>
