@@ -14,20 +14,23 @@
         <div class="container">
             <header class="header-section">
                 <h1 class="title is-5">Chilorio Tech</h1><br>
-                <p class="subtitle">-flex is-justify-content-center is-align-items-center
-                    Validador CIF
-                </p>
+                <p class="subtitle">Validador CIF</p>
             </header>
             <main class="main-content">
-                <div>
-                    Valida tu identidad (persona física/persona moral) a través de tu Cédula de Identificación Fiscal CIF
-                </div>
-                <section class="camera-section">
-                    <div class="video-container">
-                        <video id="video" autoplay playsinline aria-label="Vista de cámara para escaneo de código QR"></video>
+                <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center" style="min-height: 100vh;">
+                    <!-- Title Section -->
+                    <div class="has-text-centered mb-6" style="width: 100%; max-width: 600px;">
+                        <p class="is-size-5">
+                            Valida tu identidad (persona física/persona moral) a través de tu Cédula de Identificación Fiscal CIF
+                        </p>
                     </div>
+
+                    <!-- Camera Section -->
+                    <section class="camera-section mb-6" style="width: 100%; max-width: 600px;">
+                        <div class="video-container has-text-centered mb-4">
+                            <video id="video" autoplay playsinline aria-label="Vista de cámara para escaneo de código QR" style="max-width: 100%;"></video>
+                        </div>
                     
-                    <div class="controls mt-4">
                         <div class="buttons is-centered">
                             <button id="startBtn" class="button is-primary is-medium">
                                 <span class="icon">📷</span>
@@ -38,38 +41,30 @@
                                 <span>Desactivar Cámara</span>
                             </button>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                <div class="container is-flex is-justify-content-center is-align-items-center" style="min-height: 80vh;">
+                    <!-- Results Section -->
                     <section class="result-section" style="width: 100%; max-width: 600px;">
-                        <div class="field">
-                            <label class="label" for="result">Identidad a confirmar</label>
-                            <div class="control has-text-centered">
-                                <textarea 
-                                    id="result" 
-                                    class="textarea" 
-                                    placeholder="la identidad del código QR aparecerá aquí..." 
-                                    readonly
-                                    rows="4"
-                                ></textarea>
-                            </div>
+                    <div class="field">
+                        <label class="label has-text-centered" for="result">Identidad a confirmar</label>
+                        <div class="control">
+                            <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
                         </div>
-                        <div class="field">
-                            <label class="label" for="rfcFIeld">RFC</label>
-                            <div class="control">
-                                <input id="rfcField" class="input" type="text" maxlength="13" style="width: 8.5em; margin: 0 auto;" placeholder="XAXX010101000" readonly>
-                            </div>
+                    </div>
+                    <div class="field">
+                        <label class="label has-text-centered" for="rfcField">RFC</label>
+                        <div class="control has-text-centered">
+                            <input id="rfcField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="XAXX010101000" readonly>
                         </div>
-                        <div class="field">
-                            <label class="label" for="cifIdFIeld">CIF ID</label>
-                            <div class="control">
-                                <input id="cifIdFIeld" class="input" type="text" maxlength="13" style="width: 8.5em; margin: 0 auto;" placeholder="01234567890" readonly>
-                            </div>
+                    </div>
+                    <div class="field">
+                        <label class="label has-text-centered" for="cifIdField">CIF ID</label>
+                        <div class="control has-text-centered">
+                            <input id="cifIdField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="01234567890" readonly>
                         </div>
+                    </div>
                     </section>
                 </div>
-
             </main>
         </div>
 
