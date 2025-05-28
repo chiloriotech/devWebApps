@@ -17,7 +17,7 @@
                 <p class="subtitle">Validador CIF</p>
             </header>
             <main class="main-content">
-                <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center" style="min-height: 100vh;">
+                <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
                     <!-- Title Section -->
                     <div class="has-text-centered mb-6" style="width: 100%; max-width: 600px;">
                         <p class="is-size-5">
@@ -45,24 +45,33 @@
 
                     <!-- Results Section -->
                     <section class="result-section" style="width: 100%; max-width: 600px;">
-                    <div class="field">
-                        <label class="label has-text-centered" for="result">Identidad a confirmar</label>
-                        <div class="control">
-                            <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
+                        <div class="field">
+                            <label class="label has-text-centered" for="result">Identidad a confirmar</label>
+                            <div class="control">
+                                <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label has-text-centered" for="rfcField">RFC</label>
-                        <div class="control has-text-centered">
-                            <input id="rfcField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="XAXX010101000" readonly>
+                        <div class="field">
+                            <label class="label has-text-centered" for="rfcField">RFC</label>
+                            <div class="control has-text-centered">
+                                <input id="rfcField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="XAXX010101000" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label has-text-centered" for="cifIdField">CIF ID</label>
-                        <div class="control has-text-centered">
-                            <input id="cifIdField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="01234567890" readonly>
+                        <div class="field">
+                            <label class="label has-text-centered" for="cifIdField">CIF ID</label>
+                            <div class="control has-text-centered">
+                                <input id="cifIdField" class="input" type="text" maxlength="13" style="width: 8.5em;" placeholder="01234567890" readonly>
+                            </div>
+                            <br>
                         </div>
-                    </div>
+                        <div class="field" id="buttonsPanel">
+                            <div class="control has-text-centered">
+                                <div class="buttons is-centered">
+                                    <button id="validateBtn" class="button is-success is-medium" style="width: 6.5em;"> Validar Identidad </button>
+                                    <button id="validateBtn" class="button is-danger is-medium" style="width: 6.5em;"> Cancelar Validacion</button>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </main>
