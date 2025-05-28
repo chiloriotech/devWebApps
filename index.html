@@ -14,7 +14,7 @@
         <div class="container">
             <header class="header-section">
                 <h1 class="title is-5">Chilorio Tech</h1><br>
-                <p class="subtitle">
+                <p class="subtitle">-flex is-justify-content-center is-align-items-center
                     Validador CIF
                 </p>
             </header>
@@ -41,20 +41,35 @@
                     </div>
                 </section>
 
-                <section class="result-section mt-5">
-                    <div class="field">
-                        <label class="label" for="result">Identidad a confirmar</label>
-                        <div class="control">
-                            <textarea 
-                                id="result" 
-                                class="textarea" 
-                                placeholder="la identidad del código QR aparecerá aquí..." 
-                                readonly
-                                rows="4"
-                            ></textarea>
+                <div class="container is-flex is-justify-content-center is-align-items-center" style="min-height: 80vh;">
+                    <section class="result-section" style="width: 100%; max-width: 600px;">
+                        <div class="field">
+                            <label class="label" for="result">Identidad a confirmar</label>
+                            <div class="control has-text-centered">
+                                <textarea 
+                                    id="result" 
+                                    class="textarea" 
+                                    placeholder="la identidad del código QR aparecerá aquí..." 
+                                    readonly
+                                    rows="4"
+                                ></textarea>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                        <div class="field">
+                            <label class="label" for="rfcFIeld">RFC</label>
+                            <div class="control">
+                                <input id="rfcField" class="input" type="text" maxlength="13" style="width: 8.5em; margin: 0 auto;" placeholder="XAXX010101000" readonly>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="cifIdFIeld">CIF ID</label>
+                            <div class="control">
+                                <input id="cifIdFIeld" class="input" type="text" maxlength="13" style="width: 8.5em; margin: 0 auto;" placeholder="01234567890" readonly>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
             </main>
         </div>
 
