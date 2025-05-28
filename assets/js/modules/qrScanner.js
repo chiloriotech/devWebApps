@@ -39,6 +39,7 @@ export class QRScanner {
         requestAnimationFrame(() => this.scanLoop());
     }
 
+
     processScan() {
         if (!this.video || this.video.readyState < this.video.HAVE_ENOUGH_DATA) {
             return;
@@ -64,8 +65,18 @@ export class QRScanner {
                 this.lastResult = qrCode.data;
                 this.onResult?.(qrCode.data);
                 console.log('QR Code found:', qrCode.data);
+                try {
+                    if (qrCode.data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
+                        const payload = qrCode.data.substring(qrCode.data.lastIndexOf('=') + 1)
+                        const [cifId, rfc] = payload.split('_');
+                        console.log(payload)
+                        console.log(cifId)
+                        console.log(rfc)
+                    }
+                } catch (e) {
+                    //
+                }
             }
-
         } catch (error) {
             console.error('Error during QR scan:', error);
         }
