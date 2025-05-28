@@ -83,6 +83,11 @@ class CIFValidator {
     }
 }
 
+//
+const qrTextArea = document.getElementById('textAreaFieldDiv');
+const rfcField = document.getElementById('rfcFieldDiv');
+const cifIdField = document.getElementById('cifIdFieldDiv');
+
 // Initialize the application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new CIFValidator();
