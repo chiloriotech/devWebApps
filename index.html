@@ -1,138 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Scanner</title>
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- Custom styles -->
-    <style>
-        #reader {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        video {
-            width: 100%;
-            border-radius: 6px;
-        }
-        .hero-body {
-            padding-bottom: 1.5rem;
-        }
-    </style>
-</head>
-<body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">QR Code Scanner</h1>
-                <p class="subtitle">Point your camera at a QR code</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Validador de identidad mediante Cédula de Identificación Fiscal CIF">
+        <title>Identity Validator - CIF</title>
+        <!-- Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+    <body>
         <div class="container">
-            <div class="box">
-                <div id="reader">
-                    <video id="qr-video" class="mb-4"></video>
-                </div>
+            <header class="header-section">
+                <h1 class="title is-2">Validador CIF</h1><br>
+                <p class="subtitle">
+                    Valida tu identidad (persona física/persona moral) a través de tu Cédula de Identificación Fiscal CIF
+                </p>
+            </header>
 
-                <div class="buttons is-centered">
-                    <button id="start-button" class="button is-success">
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                            </svg>
-                        </span>
-                        <span>Start Scanner</span>
-                    </button>
-                    <button id="stop-button" class="button is-danger" disabled>
-                        <span class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
-                            </svg>
-                        </span>
-                        <span>Stop Scanner</span>
-                    </button>
-                </div>
+            <main class="main-content">
+                <section class="camera-section">
+                    <div class="video-container">
+                        <video id="video" autoplay playsinline aria-label="Vista de cámara para escaneo de código QR"></video>
+                    </div>
+                    
+                    <div class="controls mt-4">
+                        <div class="buttons is-centered">
+                            <button id="startBtn" class="button is-primary is-medium">
+                                <span class="icon">📷</span>
+                                <span>Activar Cámara</span>
+                            </button>
+                            <button id="stopBtn" class="button is-danger is-medium" disabled>
+                                <span class="icon">⏹️</span>
+                                <span>Desactivar Cámara</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-                <article id="result" class="message is-info">
-                    <div class="message-header">
-                        <p>Scan Result</p>
+                <section class="result-section mt-5">
+                    <div class="field">
+                        <label class="label" for="result">Resultado del Escaneo</label>
+                        <div class="control">
+                            <textarea 
+                                id="result" 
+                                class="textarea" 
+                                placeholder="El resultado del código QR aparecerá aquí..." 
+                                readonly
+                                rows="4"
+                            ></textarea>
+                        </div>
                     </div>
-                    <div class="message-body">
-                        No QR code detected yet
-                    </div>
-                </article>
-            </div>
+                </section>
+            </main>
         </div>
-    </section>
 
-    <!-- Include the QR code scanner library -->
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
-    <script>
-        const video = document.getElementById("qr-video");
-        const result = document.querySelector("#result .message-body");
-        const startButton = document.getElementById("start-button");
-        const stopButton = document.getElementById("stop-button");
-
-        let stream = null;
-        let scanning = false;
-
-        // Start scanning
-        startButton.addEventListener("click", async () => {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: "environment" } // Prefer rear camera on mobile
-                });
-                video.srcObject = stream;
-                video.play();
-                scanning = true;
-                startButton.disabled = true;
-                stopButton.disabled = false;
-                result.textContent = "Scanning...";
-                scanQRCode();
-            } catch (err) {
-                result.textContent = `Error: ${err.message}`;
-                console.error(err);
-            }
-        });
-
-        // Stop scanning
-        stopButton.addEventListener("click", () => {
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-                video.srcObject = null;
-                scanning = false;
-                startButton.disabled = false;
-                stopButton.disabled = true;
-                result.textContent = "Scanner stopped";
-            }
-        });
-
-        // QR Code scanning function
-        function scanQRCode() {
-            if (!scanning) return;
-
-            const canvas = document.createElement("canvas");
-            const context = canvas.getContext("2d");
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const code = jsQR(imageData.data, imageData.width, imageData.height);
-
-            if (code) {
-                result.textContent = code.data;
-                result.parentElement.classList.remove("is-info");
-                result.parentElement.classList.add("is-success");
-            } else if (scanning) {
-                requestAnimationFrame(scanQRCode);
-            }
-        }
-    </script>
-</body>
+        <!-- External Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+        <!-- Main JavaScript Module -->
+        <script type="module" src="assets/js/main.js"></script>
+    </body>
 </html>

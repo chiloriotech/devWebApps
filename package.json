@@ -1,0 +1,70 @@
+{
+  "name": "cif-validator",
+  "version": "1.0.0",
+  "description": "Validador de identidad mediante Cédula de Identificación Fiscal CIF usando códigos QR",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -c-1 --cors",
+    "dev": "npx live-server --port=8080 --open=/index.html --cors",
+    "preview": "npx http-server . -p 3000 -c-1 --cors",
+    "build": "echo 'No build process needed for vanilla JS'",
+    "lint": "npx eslint assets/js/**/*.js --fix",
+    "lint:check": "npx eslint assets/js/**/*.js",
+    "validate:html": "npx html-validate index.html",
+    "validate:css": "npx stylelint assets/css/**/*.css",
+    "test": "echo 'No tests specified'",
+    "clean": "rm -rf node_modules package-lock.json",
+    "setup": "npm install && npm run validate:html"
+  },
+  "keywords": [
+    "qr-scanner",
+    "cif-validator",
+    "javascript",
+    "bulma",
+    "camera",
+    "es6-modules",
+    "vanilla-js",
+    "pwa-ready"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "html-validate": "^8.7.4",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 1%",
+    "Chrome >= 70",
+    "Firefox >= 70",
+    "Safari >= 12",
+    "Edge >= 79"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cif-validator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/cif-validator/issues"
+  },
+  "homepage": "https://github.com/yourusername/cif-validator#readme",
+  "private": false,
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/yourusername"
+  }
+}

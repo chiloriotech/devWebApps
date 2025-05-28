@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Identity Validator - CIF</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+        <style>
+        body { padding: 20px; }
+        #video { max-width: 100%; background: #000; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title">Validador CIF</h1>
+            <div>Valida tu identidad (persona fisica/persona moral) a traves de tu Cedula de Identificacion Fiscal CIF</div>
+            <video id="video" autoplay playsinline></video>
+            <div class="buttons mt-3">
+                <button id="startBtn" class="button is-primary">Activa tu camara</button>
+                <button id="stopBtn" class="button is-danger" disabled>Desactiva tu camara</button>
+            </div>
+            <textarea id="result" class="textarea mt-3" placeholder="Scan result..." readonly></textarea>
+        </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('video');
+    const result = document.getElementById('result');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    let stream = null;
+
+    // Check camera support
+    if (!navigator.mediaDevices) {
+    result.value = "ERROR: Your browser doesn't support camera access.\n\n" +
+                    "Try Chrome/Firefox on:\n" +
+                    "- https://\n" +
+                    "- localhost\n" +
+                    "- 127.0.0.1";
+    startBtn.disabled = true;
+    return;
+    }
+
+    startBtn.addEventListener('click', async () => {
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' }
+        });
+        video.srcObject = stream;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        scanQR();
+    } catch (err) {
+        result.value = `Camera Error: ${err.message}\n\n` +
+                    `SOLUTIONS:\n` +
+                    `1. Use HTTPS\n` +
+                    `2. Enable permissions\n` +
+                    `3. Try different browser`;
+    }
+    });
+
+    stopBtn.addEventListener('click', () => {
+    if (stream) stream.getTracks().forEach(track => track.stop());
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    });
+
+    function scanQR() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function tick() {
+        if (video.readyState >= video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const code = jsQR(ctx.getImageData(0, 0, canvas.width, canvas.height).data, 
+                        canvas.width, canvas.height);
+        if (code) result.value = code.data;
+        }
+        if (stream?.active) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    }
+    });
+    </script>
+    </body>
+</html>
