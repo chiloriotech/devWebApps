@@ -1,68 +1,43 @@
 /* CSS Custom Properties */
 :root {
-  --primary-color: #1565c0; /* Darker blue */
+  --primary-color: #3273dc;
   --danger-color: #ff3860;
   --video-bg: #000;
   --border-radius: 6px;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --header-bg: #0d47a1; /* Dark blue for header */
-  --text-light: #f5f5f5;
-  --body-bg: #1e2b4f; /* Navy blue background */
 }
-
-/* Import Roboto font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 /* Base Styles */
 body {
-  padding: 0;
-  margin: 0;
-  background-color: var(--body-bg);
-  font-family: 'Roboto', sans-serif;
-  color: var(--text-light);
-  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: #fafafa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Sticky Header */
+/* Header Section */
 .header-section {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: var(--header-bg);
-  padding: 1.5rem 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .header-section .title {
-  color: white;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
-  font-weight: 700;
 }
 
 .header-section .subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  color: #666;
   font-size: 1.1rem;
   line-height: 1.5;
-  font-weight: 300;
-}
-
-/* Main Content */
-.main-content {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 /* Camera Section */
 .camera-section {
-  background: rgba(255, 255, 255, 0.1);
+  background: white;
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   margin-bottom: 2rem;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .video-container {
@@ -87,12 +62,7 @@ body {
 
 .button {
   min-width: 160px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
+  font-weight: 600;
 }
 
 .button .icon {
@@ -101,34 +71,29 @@ body {
 
 /* Result Section */
 .result-section {
-  background: rgba(255, 255, 255, 0.1);
+  background: white;
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .result-section .label {
-  font-weight: 500;
-  color: var(--text-light);
+  font-weight: 600;
+  color: #333;
 }
 
 #result {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   min-height: 100px;
   resize: vertical;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Error States */
 .error-message {
-  background-color: rgba(255, 0, 0, 0.2);
+  background-color: #ffe6e6;
   border: 1px solid #ff9999;
-  color: #ff9999;
+  color: #cc0000;
   padding: 1rem;
   border-radius: var(--border-radius);
   margin-top: 1rem;
@@ -136,12 +101,8 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .header-section {
-    padding: 1rem;
-  }
-  
-  .main-content {
-    padding: 1rem;
+  body {
+    padding: 1rem 0.5rem;
   }
   
   .camera-section,
@@ -169,5 +130,5 @@ body {
 /* Success State */
 .has-result #result {
   border-color: #48c774;
-  background-color: rgba(72, 199, 116, 0.2);
+  background-color: #f0fff4;
 }

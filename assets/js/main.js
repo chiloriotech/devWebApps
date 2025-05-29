@@ -75,8 +75,10 @@ class CIFValidator {
         this.uiController.displayResult(data);
         try {
             if (data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
-                console.log('si jalo!')
-                console.log('pinches putos!')
+                //
+                stopBtn.click()
+                cameraSectionDiv.classList.add('is-hidden')
+                //
                 const payload = data.substring(data.lastIndexOf('=') + 1)
                 const [cifId, rfc] = payload.split('_');
                 //
@@ -87,10 +89,8 @@ class CIFValidator {
                 //
                 rfcFieldDiv.classList.remove('is-hidden')
                 cifIdFieldDiv.classList.remove('is-hidden')
-                //buttonsPanel.classList.remove('is-hidden')
+                buttonsPanelDiv.classList.remove('is-hidden')
                 //
-                //rfcField.display = 'block';
-                //cifIdField.display = 'block';
             } else {
                 console.log('valente vera!!')
 
@@ -108,17 +108,30 @@ class CIFValidator {
 }
 
 // 
+const cameraSectionDiv = document.getElementById('cameraSectionDiv');
 const qrTextAreaDiv = document.getElementById('textAreaFieldDiv');
 const rfcFieldDiv = document.getElementById('rfcFieldDiv');
 const cifIdFieldDiv = document.getElementById('cifIdFieldDiv');
 const buttonsPanelDiv = document.getElementById('buttonsPanelDiv');
 const rfcFieldInput = document.getElementById('rfcFieldInput')
 const cifIdFieldInput = document.getElementById('cifIdFieldInput')
-//
+const validateBtn = document.getElementById('validateBtn')
+const cancelBtn = document.getElementById('cancelBtn')
+// 
 qrTextAreaDiv.classList.add('is-hidden')
 rfcFieldDiv.classList.add('is-hidden')
 cifIdFieldDiv.classList.add('is-hidden')
 buttonsPanelDiv.classList.add('is-hidden')
+//
+validateBtn.addEventListener('click', function() {
+
+});
+cancelBtn.addEventListener('click',function() {
+    cameraSectionDiv.classList.remove('is-hidden')
+    rfcFieldInput.value = '';
+    cifIdFieldInput.value = '';
+    
+});
 // Initialize the application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new CIFValidator();

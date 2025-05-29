@@ -24,63 +24,70 @@
                     <!-- Title Section -->
                     <div class="has-text-centered mb-6" style="width: 100%; max-width: 600px;">
                         <p class="is-size-5">
-                            Valida tu identidad (persona física/persona moral) a través del codigo QR de tu Cédula de Identificación Fiscal CIF o Constancia de Situacion Fiscal
+                            Valida tu identidad (persona física / persona moral) a través del codigo QR de tu Cédula de Identificación Fiscal CIF o Constancia de Situacion Fiscal
                         </p>
                     </div>
 
                     <!-- Camera Section -->
-                    <section class="camera-section mb-6" style="width: 100%; max-width: 600px;">
-                        <div class="video-container has-text-centered mb-4">
-                            <video id="video" autoplay playsinline aria-label="Vista de cámara para escaneo de código QR" style="max-width: 100%;"></video>
+                    <section class="camera-section mb-6"  id="cameraSection" style="width: 100%; max-width: 600px;">
+                        <div id="cameraSectionDiv">
+                            <div class="video-container has-text-centered mb-4">
+                                <video id="video" autoplay playsinline aria-label="Vista de cámara para escaneo de código QR" style="max-width: 100%;"></video>
+                            </div>
+                        
+                            <div class="buttons is-centered">
+                                <button id="startBtn" class="button is-primary is-medium">
+                                    <span class="icon">📷</span>
+                                    <span>Activar Cámara</span>
+                                </button>
+                                <button id="stopBtn" class="button is-danger is-medium" disabled>
+                                    <span class="icon">⏹️</span>
+                                    <span>Desactivar Cámara</span>
+                                </button>
+                            </div>
                         </div>
-                    
-                        <div class="buttons is-centered">
-                            <button id="startBtn" class="button is-primary is-medium">
-                                <span class="icon">📷</span>
-                                <span>Activar Cámara</span>
-                            </button>
-                            <button id="stopBtn" class="button is-danger is-medium" disabled>
-                                <span class="icon">⏹️</span>
-                                <span>Desactivar Cámara</span>
-                            </button>
-                        </div>
+
                     </section>
 
                     <!-- Results Section -->
                     <section class="result-section" style="width: 100%; max-width: 600px;">
-                        <div class="field" id="textAreaFieldDiv">
-                            <label class="label has-text-centered" for="result">Identidad a confirmar</label>
-                            <div class="control">
-                                <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="field" id="rfcFieldDiv">
-                            <label class="label has-text-centered" for="rfcFieldInput">RFC</label>
-                            <div class="control has-text-centered">
-                                <input id="rfcFieldInput" class="input" type="text" maxlength="13" style="width: 10em;" placeholder="XAXX010101000" readonly>
-                            </div>
-                        </div>
-                        <div class="field" id="cifIdFieldDiv">
-                            <label class="label has-text-centered" for="cifIdFieldInput">CIF ID</label>
-                            <div class="control has-text-centered">
-                                <input id="cifIdFieldInput" class="input" type="text" maxlength="13" style="width: 10em;" placeholder="01234567890" readonly>
-                            </div>
-                            <br>
-                        </div>
-                        <div class="field" id="buttonsPanelDiv">
-                            <div class="control has-text-centered">
-                                <div class="buttons is-centered">
-                                    <button id="validateBtn" class="button is-success is-medium" style="width: 10em;"> Validar Identidad </button>
-                                    <button id="cancelBtn" class="button is-danger is-medium" style="width: 10em;"> Cancelar Validacion</button>
+                        <div id="resultsSection">
+                            <div class="field" id="textAreaFieldDiv">
+                                <label class="label has-text-centered" for="result">Identidad a confirmar</label>
+                                <div class="control">
+                                    <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
                                 </div>
                             </div>
+                            <div class="field" id="rfcFieldDiv">
+                                <label class="label has-text-centered" for="rfcFieldInput">RFC</label>
+                                <div class="control has-text-centered">
+                                    <input id="rfcFieldInput" class="input" type="text" maxlength="13" style="width: 10em;" placeholder="XAXX010101000" readonly>
+                                </div>
+                            </div>
+                            <div class="field" id="cifIdFieldDiv">
+                                <label class="label has-text-centered" for="cifIdFieldInput">CIF ID</label>
+                                <div class="control has-text-centered">
+                                    <input id="cifIdFieldInput" class="input" type="text" maxlength="13" style="width: 10em;" placeholder="01234567890" readonly>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="field" id="buttonsPanelDiv">
+                                <div class="control has-text-centered">
+                                    <div class="buttons is-centered">
+                                        <button id="validateBtn" class="button is-success is-medium" style="width: 10em;"> Validar Identidad </button>
+                                        <button id="cancelBtn" class="button is-danger is-medium" style="width: 10em;"> Cancelar Validacion</button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                     </section>
                 </div>
             </main>
         </div>
 
-        <!-- External Libraries -->
+        <!-- External Libraries -->  
         <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
         <!-- Main JavaScript Module -->
         <script type="module" src="assets/js/main.js"></script>
