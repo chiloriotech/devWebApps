@@ -69,9 +69,16 @@ export class QRScanner {
                     if (qrCode.data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
                         const payload = qrCode.data.substring(qrCode.data.lastIndexOf('=') + 1)
                         const [cifId, rfc] = payload.split('_');
-                        console.log(payload)
-                        console.log(cifId)
-                        console.log(rfc)
+                        //
+                        rfcField.value = rfc;
+                        cifIdField.value = cifId;
+                        //
+                        rfcField.classList.remove('is-hidden')
+                        cifIdField.classList.remove('is-hidden')
+                        buttonsPanel.classList.remove('is-hidden')
+                        //
+                        rfcField.display = 'block';
+                        cifIdField.display = 'block';
                     }
                 } catch (e) {
                     //

@@ -88,6 +88,7 @@ const qrTextArea = document.getElementById('textAreaFieldDiv');
 const rfcField = document.getElementById('rfcFieldDiv');
 const cifIdField = document.getElementById('cifIdFieldDiv');
 const buttonsPanel = document.getElementById('buttonsPanelDiv');
+console.log(buttonsPanel)
 //
 qrTextArea.classList.add('is-hidden')
 rfcField.classList.add('is-hidden')
