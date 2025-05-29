@@ -74,6 +74,26 @@ class CIFValidator {
     handleQRResult(data) {
         this.uiController.displayResult(data);
         console.log('QR Code detected:', data);
+        try {
+            if (data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
+                const payload = data.substring(qrCode.data.lastIndexOf('=') + 1)
+                const [cifId, rfc] = payload.split('_');
+                //
+                rfcField.value = rfc;
+                cifIdField.value = cifId;
+                //
+                console.log(rfcField, cifIdField)
+
+                //rfcField.classList.remove('is-hidden')
+                //cifIdField.classList.remove('is-hidden')
+                //buttonsPanel.classList.remove('is-hidden')
+                //
+                //rfcField.display = 'block';
+                //cifIdField.display = 'block';
+            }
+        } catch (e) {
+            //
+        }
     }
 
     stopScanning() {
@@ -88,7 +108,6 @@ const qrTextArea = document.getElementById('textAreaFieldDiv');
 const rfcField = document.getElementById('rfcFieldDiv');
 const cifIdField = document.getElementById('cifIdFieldDiv');
 const buttonsPanel = document.getElementById('buttonsPanelDiv');
-console.log(buttonsPanel)
 //
 qrTextArea.classList.add('is-hidden')
 rfcField.classList.add('is-hidden')

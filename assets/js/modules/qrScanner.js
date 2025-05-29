@@ -64,25 +64,6 @@ export class QRScanner {
             if (qrCode && qrCode.data !== this.lastResult) {
                 this.lastResult = qrCode.data;
                 this.onResult?.(qrCode.data);
-                console.log('QR Code found:', qrCode.data);
-                try {
-                    if (qrCode.data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
-                        const payload = qrCode.data.substring(qrCode.data.lastIndexOf('=') + 1)
-                        const [cifId, rfc] = payload.split('_');
-                        //
-                        rfcField.value = rfc;
-                        cifIdField.value = cifId;
-                        //
-                        rfcField.classList.remove('is-hidden')
-                        cifIdField.classList.remove('is-hidden')
-                        buttonsPanel.classList.remove('is-hidden')
-                        //
-                        rfcField.display = 'block';
-                        cifIdField.display = 'block';
-                    }
-                } catch (e) {
-                    //
-                }
             }
         } catch (error) {
             console.error('Error during QR scan:', error);
