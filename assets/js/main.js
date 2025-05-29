@@ -73,23 +73,27 @@ class CIFValidator {
 
     handleQRResult(data) {
         this.uiController.displayResult(data);
-        console.log('QR Code detected:', data);
         try {
             if (data.toLowerCase().includes('siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf'.toLowerCase())) {
-                const payload = data.substring(qrCode.data.lastIndexOf('=') + 1)
+                console.log('si jalo!')
+                console.log('pinches putos!')
+                const payload = data.substring(data.lastIndexOf('=') + 1)
                 const [cifId, rfc] = payload.split('_');
                 //
-                rfcField.value = rfc;
-                cifIdField.value = cifId;
+                console.log(rfcFieldInput)
+                console.log(cifIdFieldInput)
+                rfcFieldInput.value = rfc;
+                cifIdFieldInput.value = cifId;
                 //
-                console.log(rfcField, cifIdField)
-
-                //rfcField.classList.remove('is-hidden')
-                //cifIdField.classList.remove('is-hidden')
+                rfcFieldDiv.classList.remove('is-hidden')
+                cifIdFieldDiv.classList.remove('is-hidden')
                 //buttonsPanel.classList.remove('is-hidden')
                 //
                 //rfcField.display = 'block';
                 //cifIdField.display = 'block';
+            } else {
+                console.log('valente vera!!')
+
             }
         } catch (e) {
             //
@@ -103,16 +107,18 @@ class CIFValidator {
     }
 }
 
+// 
+const qrTextAreaDiv = document.getElementById('textAreaFieldDiv');
+const rfcFieldDiv = document.getElementById('rfcFieldDiv');
+const cifIdFieldDiv = document.getElementById('cifIdFieldDiv');
+const buttonsPanelDiv = document.getElementById('buttonsPanelDiv');
+const rfcFieldInput = document.getElementById('rfcFieldInput')
+const cifIdFieldInput = document.getElementById('cifIdFieldInput')
 //
-const qrTextArea = document.getElementById('textAreaFieldDiv');
-const rfcField = document.getElementById('rfcFieldDiv');
-const cifIdField = document.getElementById('cifIdFieldDiv');
-const buttonsPanel = document.getElementById('buttonsPanelDiv');
-//
-qrTextArea.classList.add('is-hidden')
-rfcField.classList.add('is-hidden')
-cifIdField.classList.add('is-hidden')
-buttonsPanel.classList.add('is-hidden')
+qrTextAreaDiv.classList.add('is-hidden')
+rfcFieldDiv.classList.add('is-hidden')
+cifIdFieldDiv.classList.add('is-hidden')
+buttonsPanelDiv.classList.add('is-hidden')
 // Initialize the application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new CIFValidator();
