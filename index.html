@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Validador de identidad mediante Cédula de Identificación Fiscal CIF">
-        <title>Identity Validator - CIF</title>
+        <link rel="icon" href="/assets/img/favicon/favicon-32x32.png" type="image/png" sizes="32x32">
+        <title>ITANOR - Validador CIF</title>
         <!-- Bulma CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
         <!-- Custom CSS -->
@@ -12,9 +13,11 @@
     </head>
     <body>
         <div class="container">
-            <header class="header-section">
-                <h1 class="title is-5">Chilorio Tech</h1><br>
-                <p class="subtitle">Validador CIF</p>
+            <header class="header-section px-4 py-3">
+                <div class="is-flex is-align-items-center">
+                    <img src="assets/img/logo/itanorLogo50px.png" alt="Company Logo"  class="mr-3" style="height: 2.5rem; width: auto;">
+                    <h1 class="title is-5 mb-0">Validador CIF</h1><br>
+                </div>
             </header>
             <main class="main-content">
                 <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
@@ -45,7 +48,7 @@
 
                     <!-- Results Section -->
                     <section class="result-section" style="width: 100%; max-width: 600px;">
-                        <div class="field" id=""textAreaFieldDiv>
+                        <div class="field" id="textAreaFieldDiv">
                             <label class="label has-text-centered" for="result">Identidad a confirmar</label>
                             <div class="control">
                                 <textarea id="result" class="textarea" placeholder="la identidad del código QR aparecerá aquí..." readonly rows="4"></textarea>
