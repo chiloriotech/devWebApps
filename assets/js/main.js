@@ -87,10 +87,12 @@ class CIFValidator {
 const qrTextArea = document.getElementById('textAreaFieldDiv');
 const rfcField = document.getElementById('rfcFieldDiv');
 const cifIdField = document.getElementById('cifIdFieldDiv');
+const buttonsPanel = document.getElementById('buttonsPanelDiv')
 //
 qrTextArea.classList.add('is-hidden')
 rfcField.classList.add('is-hidden')
 cifIdField.classList.add('is-hidden')
+buttonsPanel.classList.add('is-hidden')
 // Initialize the application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new CIFValidator();
